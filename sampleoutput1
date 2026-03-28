@@ -1,3 +1,5 @@
+AtomicArchitecture Sample Output:
+
 How many unique element types? 2
 Enter Atomic Number (1-118): 6
 Enter Quantity: 8
@@ -255,4 +257,4 @@ Step 600 | Temp: 111.25 K | Status: STABILIZED
 Step 800 | Temp: 111.47 K | Status: STABILIZED
 Step 1000 | Temp: 111.50 K | Status: STABILIZED
 
-Analyze another? (y/n): 
+Analyze another? (y/n):
