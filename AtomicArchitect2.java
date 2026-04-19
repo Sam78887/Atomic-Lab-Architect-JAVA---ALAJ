@@ -201,7 +201,7 @@ if (counts.containsKey("O") && counts.containsKey("H")) {
     double muAmu = (oxy.weight * hyd.weight) / (oxy.weight + hyd.weight);
     double muKg = muAmu * 1.660539e-27;
     
-    // Force constant for O-H is typically much higher (~780 N/m)
+    // Force constant for O-H is typically much higher (~780 N/m) Created by: Sam78887
     double kOH = 780.0; 
     double freqHz = (1.0 / (2.0 * Math.PI)) * Math.sqrt(kOH / muKg);
     double freqTHz = freqHz / 1.0e12;
@@ -216,7 +216,7 @@ if (counts.containsKey("O") && counts.containsKey("H")) {
 
 
                 //double vibFreq = (1.0 / (2 * Math.PI)) * Math.sqrt((500.0 * (central.en * secondary.en / 4.0)) / (mu * 1.66e-27)) * 1e-12 / 1e8;
-                //System.out.printf("Vibration Frequency: ~%.2f THz\n", vibFreq);
+                //System.out.printf("Vibration Frequency: ~%.2f THz\n", vibFreq); Created by: Sam78887
                 if (secondary != null) {
     // 1. Calculate Reduced Mass (mu) in amu
     double muAmu = (central.weight * secondary.weight) / (central.weight + secondary.weight);
@@ -229,7 +229,7 @@ if (counts.containsKey("O") && counts.containsKey("H")) {
     double k = 500.0 * (1.0 + Math.abs(central.en - secondary.en) / 2.0);
     
     // 4. Calculate Frequency in Hz, then convert to THz
-    // 1 THz = 10^12 Hz
+    // 1 THz = 10^12 Hz Created by: Sam78887
     double freqHz = (1.0 / (2.0 * Math.PI)) * Math.sqrt(k / muKg);
     double freqTHz = freqHz / 1.0e12;
 
@@ -244,7 +244,7 @@ if (counts.containsKey("O") && counts.containsKey("H")) {
                 int sn = attached + lp;
                 System.out.println("Central Atom: " + central.name);
                 System.out.println("Steric Number: " + sn + " (Atoms: " + attached + ", Lone Pairs: " + lp + ")");
-                predictGeometry(sn, lp);
+                predictGeometry(sn, lp); // Created by: Sam78887
             }
 */
             if (totalAtoms > 1) {
@@ -256,7 +256,7 @@ if (counts.containsKey("O") && counts.containsKey("H")) {
         System.out.println("At Carbon Center: Tetrahedral (109.5°)");
     }
 
-    // 2. Oxygen (Hydroxyl) Center Analysis
+    // 2. Oxygen (Hydroxyl) Center Analysis Created by: Sam78887
     if (counts.containsKey("O") && counts.containsKey("H")) {
         // Oxygen in -OH has 2 bonds (C-O and O-H) and 2 lone pairs
         int snO = 4; 
@@ -280,7 +280,7 @@ if (counts.containsKey("O") && counts.containsKey("H")) {
         double sigma = 3.5, epsilon = 0.2, targetTemp = 200.0;
         String molName = "Generic Compound";
 
-        // Inside runLabSimulation
+        // Inside runLabSimulation Created by: Sam78887
 int cCount = counts.getOrDefault("C", 0);
 boolean hBond = counts.containsKey("H") && (counts.containsKey("O") || counts.containsKey("N"));
 
@@ -302,7 +302,7 @@ epsilon = hBond ? 0.55 : (cCount > 4 ? 0.22 : 0.15);
         else {
 
             
-            // 1. Get structural counts for the formula
+            // 1. Get structural counts for the formula Created by: Sam78887
             
             int hCount = counts.getOrDefault("H", 0);
             int oCount = counts.getOrDefault("O", 0);
@@ -324,7 +324,7 @@ epsilon = hBond ? 0.55 : (cCount > 4 ? 0.22 : 0.15);
             // 4. Final Target Calculation
             targetTemp = surfaceAreaBase + polarityBonus + 200.0;
             
-            // Adjust Epsilon (Stickiness) based on polarity
+            // Adjust Epsilon (Stickiness) based on polarity Created by: Sam78887
             epsilon = (oCount > 0 || nCount > 0) ? 0.55 : 0.25; 
             
             molName = generateFormula(counts);
@@ -352,6 +352,7 @@ molName = generateFormula(counts); // Dynamically name it
             for (Particle p : particles) { p.fx = p.fy = p.fz = 0; }
             for (int i = 0; i < particles.size(); i++) {
                 for (int j = i + 1; j < particles.size(); j++) {
+                    // Created by: Sam78887
                     Particle p1 = particles.get(i), p2 = particles.get(j);
                     double dx = p1.x-p2.x, dy = p1.y-p2.y, dz = p1.z-p2.z;
                     double r2 = dx*dx + dy*dy + dz*dz + 0.5;
@@ -390,6 +391,7 @@ molName = generateFormula(counts); // Dynamically name it
     // 1. Base BP for a single carbon (Methane) starts low (~ -161C)
     // 2. Each Carbon adds ~25-30 degrees of "Stickiness"
     // 3. Hydrogen Bonding adds a massive static jump
+    // Created by: Sam78887
     
     double baseBP = -170.0; // Starting point for smallest molecules
     double chainEffect = (cCount * 32.0); 
@@ -411,7 +413,7 @@ molName = generateFormula(counts); // Dynamically name it
     int cCount = counts.getOrDefault("C", 0);
     boolean hasHBond = counts.containsKey("H") && (counts.containsKey("O") || counts.containsKey("N"));
     
-    // Match the logic from your simulation for consistency
+    // Match the logic from your simulation for consistency Created by: Sam78887
     double estimatedBP = (cCount * 22.0) + (weight * 0.4) + (hasHBond ? 165.0 : 20.0);
     double celsiusBP = estimatedBP - 273.15;
 
@@ -447,7 +449,7 @@ molName = generateFormula(counts); // Dynamically name it
         int o = counts.get("O");
         
         // If it's a simple alcohol, format as CxH(2x+1)OH
-        // For Ethanol (C2H6O), this results in C2H5OH
+        // For Ethanol (C2H6O), this results in C2H5OH Created by: Sam78887
         return String.format("C%sH%sOH", (c > 1 ? c : ""), (h - 1 > 1 ? (h - 1) : ""));
     }
 
@@ -488,7 +490,7 @@ molName = generateFormula(counts); // Dynamically name it
         return sm.toString(); // Results in "CCO" for Ethanol
     }
     
-    // Fallback for other molecules
+    // Fallback for other molecules Created by: Sam78887
     return central.symbol + "(OH)"; 
 }
 
@@ -514,7 +516,7 @@ public static String generateSMILES(Atom central, Map<String, Integer> counts) {
         }
     }
     
-    // 3. Special case for Alcohols: If Oxygen is present, ensure it shows as the -OH group
+    // 3. Special case for Alcohols: If Oxygen is present, ensure it shows as the -OH group Created by: Sam78887
     if (counts.containsKey("O") && !sm.toString().contains("O")) {
         sm.append("O");
     }
@@ -534,7 +536,7 @@ public static String generateSMILES(Atom central, Map<String, Integer> counts) {
     }
 */
 
-    // Updated predictGeometry method:
+    // Updated predictGeometry method: Created by: Sam78887
 public static void predictGeometry(int sn, int lp) {
     if (sn == 2) System.out.println("Linear (180°)");
     else if (sn == 3) System.out.println(lp == 0 ? "Trigonal Planar (120°)" : "Bent (~118°)");
@@ -581,7 +583,7 @@ public static void predictReaction(Map<String, Integer> molA, Map<String, Intege
 public static void predictReaction(Map<String, Integer> molA, Map<String, Integer> molB) {
     System.out.println("\n--- ⚗️ Reaction Prediction Lab ---");
     
-    // Molecule A Profile
+    // Molecule A Profile Created by: Sam78887
     int cA = molA.getOrDefault("C", 0), hA = molA.getOrDefault("H", 0), oA = molA.getOrDefault("O", 0);
     int nA = molA.getOrDefault("N", 0), sA = molA.getOrDefault("S", 0), fA = molA.getOrDefault("F", 0);
     
@@ -625,14 +627,14 @@ public static void predictReaction(Map<String, Integer> molA, Map<String, Intege
         System.out.println("Status: Carbon-Halogen bonds forming. Potential Teflon precursor.");
     }
 
-    // 5. Synthesis of Sulfides (Metal/H2 + Sulfur)
+    // 5. Synthesis of Sulfides (Metal/H2 + Sulfur) Created by: Sam78887
     else if (sB > 0 && (hA > 0 || molA.containsKey("Fe") || molA.containsKey("Cu"))) {
         System.out.println("Reaction: [SULFIDE FORMATION]");
         if (hA > 0) System.out.println("Product: Hydrogen Sulfide (H2S) - Warning: Toxic/Rotten Egg Odor.");
         else System.out.println("Product: Metallic Sulfide (Tarnish/Mineral Layer).");
     }
 
-    // 6. Precipitation (Silver + Halogen) - Specific Test
+    // 6. Precipitation (Silver + Halogen) - Specific Test Created by: Sam78887
     else if (molA.containsKey("Ag") && clB > 0) {
         System.out.println("Reaction: [PRECIPITATION]");
         System.out.println("Product: Silver Chloride (AgCl) - White insoluble solid.");
